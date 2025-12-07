@@ -62,7 +62,7 @@ ARM Assembly, Stacks, Parsing Algorithms, Low-Level Debugging, Embedded Toolchai
 
 ## 🚀 About Me
 
-I'm an Electrical and Computer Engineering Honors student at UT Austin focused on **computer architecture and embedded systems**. I'm especially interested in low-level hardware/software interaction, firmware, and digital systems.
+I'm an Electrical and Computer Engineering Honors student at UT Austin focused on **computer architecture and embedded systems**. I'm especially interested in low-level hardware/software interaction, firmware, and digital systems. I am also interested in data science, statistics, pattern recognition, predictive analytics, and human-machine interaction
 
 LinkedIn: www.linkedin.com/in/maaz-ahmed-utexas 
 Email: maazahmed@utexas.edu
