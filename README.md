@@ -1,74 +1,88 @@
 # UT Austin ECE Projects — Maaz Ahmed
 
-Hardware, embedded systems, and software projects from my Electrical and Computer Engineering coursework at The University of Texas at Austin.
+Hardware, embedded systems, and software projects from my ECE coursework at The University of Texas at Austin.
+
+---
+
+## 🔧 ECE 319H PCB — Embedded Game System Board *(In Progress)*
+
+**Course:** ECE 319H — Introduction to Embedded Systems (Honors)
+
+Custom two-layer PCB designed in KiCad for a handheld embedded game system built around the TI MSPM0G3507 microcontroller. The board consolidates all hardware interfaces from Labs 5–9 onto a single manufactured circuit board, replacing breadboard wiring with proper routed traces, test points, and mounting hardware.
+
+**Hardware on board:**
+- 5-bit binary-weighted DAC with speaker output for sound generation
+- ST7735R SPI LCD interface (160×128) for graphics rendering
+- 4 tactile switches with 10kΩ pull-down resistors and ULN2003A Darlington driver for LEDs
+- Slide potentiometer on ADC input with dedicated test point
+- 3-pin jumper headers for UART loopback (Lab 8 IR communication)
+- TSOP31438 IR receiver and IR LED output interface for wireless serial communication
+- TExaS oscilloscope analog mux (jumper-selectable between DAC output and slide pot)
+- 4-40 mounting holes and dual 20-pin headers for LaunchPad connection
+
+**Design process:** Schematic capture → ERC validation → component placement for ergonomic handheld use → power/ground star routing (0.5mm traces) → signal routing (0.2mm traces) → DRC → Gerber generation → fabrication by JLCPCB
+
+**Tools:** KiCad 9, JLCPCB
+
+📁 `pcb-game-system/`
 
 ---
 
 ## ⚡ Buck Converter — ECE 302H
 
-Designed, assembled, and tested a PWM-controlled DC–DC buck converter that steps down 10–16 V inputs using discrete power electronics.
+PWM-controlled DC–DC buck converter designed to step down 10–16V inputs using discrete power electronics. Assembled and tested under a 10W resistive load.
 
-**Highlights:** NMOS power MOSFETs with gate driver IC, LC output filter, op-amp high-side current sensing, tested under 10 W resistive load.
+- NMOS power MOSFETs with gate driver IC
+- LC output filter with op-amp–based high-side current sensing
+- Designed in KiCad, hand-soldered, debugged with oscilloscope
 
-**Skills:** Power Electronics, PCB Assembly, Soldering, Oscilloscope Debugging, KiCad, Analog Feedback
+**Tools:** KiCad, Oscilloscope, Soldering
 
 📁 `buck-converter/`
 
 ---
 
-## 🚦 Traffic Light FSM — ECE 319H
+## 🎮 Embedded Systems Labs — ECE 319K
 
-Finite state machine controller for a two-road intersection with pedestrian crossing, built entirely with a linked data structure in C — no conditional branches in the engine. Three sensor inputs (south, west, walk) drive nine LED outputs through the FSM with safe all-red transitions and a flashing don't-walk sequence.
+### Traffic Light FSM Controller (Lab 4)
 
-**Highlights:** Moore FSM with ~15 states and 8-way branching per state, SysTick timer delays, Darlington transistor LED drivers, positive-logic switch interfaces on the MSPM0G3507.
+Finite state machine controller for a traffic intersection with pedestrian crossing, implemented entirely with a linked data structure — no conditional branching. States, transitions, and output logic are encoded in a struct array indexed by next-state pointers.
 
-**Skills:** Finite State Machines, Embedded C, GPIO Interfacing, Hardware Debugging
+**Tools:** C, TI MSPM0G3507, GPIO
 
 📁 `traffic-light-fsm/`
 
----
+### Digital Piano with DAC (Lab 5)
 
-## 🎹 Digital Piano — ECE 319H
+Built a 5-bit binary-weighted DAC from discrete resistors to generate audio waveforms. Wrote interrupt-driven sound routines (SysTick at 11kHz) with a foreground/background multithreaded architecture. Piano keys are read via GPIO and mapped to frequency lookup tables.
 
-Four-key synthesizer built around a 5-bit binary-weighted resistor DAC. A SysTick interrupt service routine outputs a sampled sine wave to the DAC at a rate that sets the pitch, while the main loop polls the keyboard — a simple two-thread foreground/background architecture.
-
-**Highlights:** Custom resistor-network DAC (0.75 kΩ–12 kΩ), interrupt-driven waveform generation, four-switch keyboard with frequency verification on an oscilloscope and spectrum analyzer.
-
-**Skills:** DACs, SysTick Interrupts, Multithreading (ISR + main loop), Analog Circuit Design, Embedded C
+**Tools:** C, SysTick Interrupts, DAC Design, GPIO
 
 📁 `digital-piano-dac/`
 
----
+### ST7735R LCD Device Driver (Lab 6)
 
-## 🖥️ LCD Device Driver — ECE 319H
+SPI device driver for the ST7735R 160×128 LCD. Implemented busy-wait synchronization for SPI transactions and wrote fixed-point decimal and integer-to-string conversion routines in ARM assembly (`StringConversion.s`). Driver supports pixel drawing, line rendering, and formatted text output.
 
-Bare-metal device driver for the Sitronix ST7735R 160×128 LCD, written in ARM assembly on the MSPM0G3507. Implements SPI busy-wait synchronization, integer-to-decimal string conversion with stack-based local variables, and fixed-point number display.
-
-**Highlights:** SPI command/data output routines in assembly, recursive `OutDec` for integer-to-ASCII conversion, scope-verified byte and character transmission timing.
-
-**Skills:** ARM Assembly, SPI Protocol, Device Drivers, Busy-Wait Synchronization, Fixed-Point Arithmetic
+**Tools:** C, ARM Assembly, SPI, Busy-Wait Synchronization
 
 📁 `lcd-device-driver/`
 
 ---
 
-## 🧠 Memory Pool Allocator — ECE 312H
+## 🧠 Software Design Labs — ECE 312
 
-Custom memory manager that operates on a fixed 4096-byte pool — essentially a simplified `malloc`/`free` implementation. Manages allocations with a doubly-linked, address-ordered free list, first-fit search, block splitting, and coalescing of adjacent free blocks.
+### Memory Pool Allocator (Lab 3)
 
-**Highlights:** Doubly-linked free list with address-ordered insertion, block splitting with external heap headers, multi-block coalescing chains, fragmentation tracking, double-free and invalid-pointer detection.
+Custom memory allocator built from scratch — manages a fixed-size memory pool using an explicit free list with first-fit allocation. Handles allocation, deallocation, and coalescing of adjacent free blocks to reduce fragmentation. No calls to `malloc` or `free`.
 
-**Skills:** C, Dynamic Memory Management, Linked Lists, Systems Programming
+**Tools:** C, Pointers, Dynamic Memory Management
 
 📁 `memory-pool-allocator/`
 
----
+### Foundational Data Structures (Labs 1–2)
 
-## 📦 Data Structures in C — ECE 312H
-
-Implementations of core data structures from scratch: a **dynamic array** (auto-resizing with `realloc`, similar to `std::vector`) and a **singly linked list** with full insert/remove/traverse operations. Both are Valgrind-clean with no memory leaks.
-
-**Skills:** C, Pointers, `malloc`/`realloc`/`free`, Edge-Case Handling
+Implementations of a dynamic array with amortized-doubling resize strategy and a singly linked list with insert, delete, search, and reversal operations. Both use manual heap allocation and pointer manipulation.
 
 📁 `dynamic-array/` · `linked-list/`
 
@@ -76,6 +90,6 @@ Implementations of core data structures from scratch: a **dynamic array** (auto-
 
 ## About Me
 
-ECE Honors student at UT Austin focused on computer architecture, embedded systems, and low-level software. Interested in hardware/software interaction, firmware, digital systems, data science, and human-machine interaction.
+ECE Honors student at UT Austin. Interested in computer architecture, embedded systems, firmware, digital design, and hardware-software interaction. Also into data science, predictive analytics, and human-machine interaction.
 
 [LinkedIn](https://www.linkedin.com/in/maaz-ahmed-utexas) · maazahmed@utexas.edu
