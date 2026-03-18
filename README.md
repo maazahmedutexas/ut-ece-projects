@@ -42,7 +42,7 @@ PWM-controlled DC–DC buck converter designed to step down 10–16V inputs usin
 
 ---
 
-## 🎮 Embedded Systems Labs — ECE 319K
+## 🎮 Embedded Systems Labs — ECE 319H
 
 ### Traffic Light FSM Controller (Lab 4)
 
@@ -70,7 +70,7 @@ SPI device driver for the ST7735R 160×128 LCD. Implemented busy-wait synchroniz
 
 ---
 
-## 🧠 Software Design Labs — ECE 312
+## 🧠 Software Design Labs — ECE 312H
 
 ### Memory Pool Allocator (Lab 3)
 
