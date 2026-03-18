@@ -1,68 +1,81 @@
-# ut-ece-projects
-Hardware + systems projects from UT Austin ECE F25 (buck converter, LC-3 game, ARM assembly)
+# UT Austin ECE Projects — Maaz Ahmed
 
-# UT Austin ECE Projects – Maaz Ahmed
-
-This repository contains selected hardware and low-level systems projects completed as part of my Electrical and Computer Engineering (ECE) coursework at The University of Texas at Austin. These projects focus on power electronics, computer architecture, and embedded-style systems programming.
+Hardware, embedded systems, and software projects from my Electrical and Computer Engineering coursework at The University of Texas at Austin.
 
 ---
 
-## ⚡ Buck Converter – ECE 302H
+## ⚡ Buck Converter — ECE 302H
 
-**Overview:**  
-Designed, assembled, and tested a PWM-controlled DC–DC buck converter to step down 10–16 V inputs using discrete power electronics components.
+Designed, assembled, and tested a PWM-controlled DC–DC buck converter that steps down 10–16 V inputs using discrete power electronics.
 
-**Key Features:**
-- NMOS power MOSFETs with gate driver IC
-- LC output filter
-- Op-amp–based high-side current sensing
-- Tested under 10W resistive load
+**Highlights:** NMOS power MOSFETs with gate driver IC, LC output filter, op-amp high-side current sensing, tested under 10 W resistive load.
 
-**Skills Used:**
-Power Electronics, PCB Assembly, Soldering, Oscilloscope Debugging, KiCad, Analog Feedback
+**Skills:** Power Electronics, PCB Assembly, Soldering, Oscilloscope Debugging, KiCad, Analog Feedback
 
-📁 Folder: `buck-converter/`
+📁 `buck-converter/`
 
 ---
 
-## 🐾 Save Simba – LC-3 Assembly Game (ECE 306H)
+## 🚦 Traffic Light FSM — ECE 319K
 
-**Overview:**  
-A grid-based game written entirely in LC-3 assembly. The world is dynamically loaded from memory using a linked list, and the player moves through the grid while tracking life count and collisions.
+Finite state machine controller for a two-road intersection with pedestrian crossing, built entirely with a linked data structure in C — no conditional branches in the engine. Three sensor inputs (south, west, walk) drive nine LED outputs through the FSM with safe all-red transitions and a flashing don't-walk sequence.
 
-**Key Features:**
-- Linked-list based world loading
-- Player movement and boundary checking
-- Collision detection with enemies and power-ups
-- Subroutine-based state management
+**Highlights:** Moore FSM with ~15 states and 8-way branching per state, SysTick timer delays, Darlington transistor LED drivers, positive-logic switch interfaces on the MSPM0G3507.
 
-**Skills Used:**
-LC-3 Assembly, Linked Lists, Low-Level State Machines, Memory Addressing, Debugging
+**Skills:** Finite State Machines, Embedded C, GPIO Interfacing, Hardware Debugging
 
-📁 Folder: `save-simba/`
+📁 `traffic-light-fsm/`
 
 ---
 
-## 🧮 Postfix Expression Evaluator – ARM Assembly (ECE 306H)
+## 🎹 Digital Piano — ECE 319K
 
-**Overview:**  
-Bare-metal ARM assembly program that converts fully parenthesized infix expressions into postfix and evaluates them using a stack-based algorithm.
+Four-key synthesizer built around a 5-bit binary-weighted resistor DAC. A SysTick interrupt service routine outputs a sampled sine wave to the DAC at a rate that sets the pitch, while the main loop polls the keyboard — a simple two-thread foreground/background architecture.
 
-**Key Features:**
-- Infix → Postfix conversion
-- Stack-based expression evaluation
-- Bare-metal ARM execution (virtual board + TI MSPM0 tooling)
+**Highlights:** Custom resistor-network DAC (0.75 kΩ–12 kΩ), interrupt-driven waveform generation, four-switch keyboard with frequency verification on an oscilloscope and spectrum analyzer.
 
-**Skills Used:**
-ARM Assembly, Stacks, Parsing Algorithms, Low-Level Debugging, Embedded Toolchains
+**Skills:** DACs, SysTick Interrupts, Multithreading (ISR + main loop), Analog Circuit Design, Embedded C
 
-📁 Folder: `postfix-arm/`
+📁 `digital-piano-dac/`
 
 ---
 
-## 🚀 About Me
+## 🖥️ LCD Device Driver — ECE 319K
 
-I'm an Electrical and Computer Engineering Honors student at UT Austin focused on **computer architecture and embedded systems**. I'm especially interested in low-level hardware/software interaction, firmware, and digital systems. I am also interested in data science, statistics, pattern recognition, predictive analytics, and human-machine interaction
+Bare-metal device driver for the Sitronix ST7735R 160×128 LCD, written in ARM assembly on the MSPM0G3507. Implements SPI busy-wait synchronization, integer-to-decimal string conversion with stack-based local variables, and fixed-point number display.
 
-LinkedIn: www.linkedin.com/in/maaz-ahmed-utexas 
-Email: maazahmed@utexas.edu
+**Highlights:** SPI command/data output routines in assembly, recursive `OutDec` for integer-to-ASCII conversion, scope-verified byte and character transmission timing.
+
+**Skills:** ARM Assembly, SPI Protocol, Device Drivers, Busy-Wait Synchronization, Fixed-Point Arithmetic
+
+📁 `lcd-device-driver/`
+
+---
+
+## 🧠 Memory Pool Allocator — ECE 312
+
+Custom memory manager that operates on a fixed 4096-byte pool — essentially a simplified `malloc`/`free` implementation. Manages allocations with a doubly-linked, address-ordered free list, first-fit search, block splitting, and coalescing of adjacent free blocks.
+
+**Highlights:** Doubly-linked free list with address-ordered insertion, block splitting with external heap headers, multi-block coalescing chains, fragmentation tracking, double-free and invalid-pointer detection.
+
+**Skills:** C, Dynamic Memory Management, Linked Lists, Systems Programming
+
+📁 `memory-pool-allocator/`
+
+---
+
+## 📦 Data Structures in C — ECE 312
+
+Implementations of core data structures from scratch: a **dynamic array** (auto-resizing with `realloc`, similar to `std::vector`) and a **singly linked list** with full insert/remove/traverse operations. Both are Valgrind-clean with no memory leaks.
+
+**Skills:** C, Pointers, `malloc`/`realloc`/`free`, Edge-Case Handling
+
+📁 `dynamic-array/` · `linked-list/`
+
+---
+
+## About Me
+
+ECE Honors student at UT Austin focused on computer architecture, embedded systems, and low-level software. Interested in hardware/software interaction, firmware, digital systems, data science, and human-machine interaction.
+
+[LinkedIn](https://www.linkedin.com/in/maaz-ahmed-utexas) · maazahmed@utexas.edu
